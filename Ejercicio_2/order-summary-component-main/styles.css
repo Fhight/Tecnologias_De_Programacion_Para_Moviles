@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700;900&display=swap");
+
+body {
+  background-color: #e0e8ff;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  position: absolute;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.imageHeader {
+  border-radius: 30px 30px 0 0;
+}
+
+.information {
+  position: relative;
+  padding: 20px 30px 20px 30px;
+  background-color: #fff;
+  border-radius: 0 0 30px 30px;
+  width: 390px;
+}
+
+.title h1{
+    
+    font-weight: 900;
+    font-family: 'Red Hat Display', sans-serif;
+    color: darkblue;
+    text-align: center;
+}
+
+.content p {
+  text-align: center;
+  font-size: 16px;
+  font-family: 'Red Hat Display', sans-serif;
+  padding: 0 20px 0 20px;
+  color: hsl(224, 23%, 55%);
+}
+
+.plan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: hsl(225, 100%, 98%);
+    padding: 5px 20px 5px 20px;
+    border-radius: 15px;
+}
+
+.planInfo{
+    display: flex;
+    align-items: center;
+}
+
+.planDescription{
+    font-family: 'Red Hat Display', sans-serif;
+    text-align: center;
+}
+
+.planDescription h4{
+    font-weight: 900;
+    color: darkblue;
+    margin-bottom: 0;
+    width: 100%;
+}
+   
+.planDescription p{
+    margin-top: 0;
+}
+
+.change a{
+    color: hsl(245, 75%, 52%);
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: bold;
+}
+
+.change a:hover{
+    color: hsl(245, 75%, 62%);
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.options button{
+    background-color: hsl(245, 75%, 52%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px 15px 20px;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;        
+    box-shadow: 4px 10px 24px hsl(225, 70%, 72%);
+}
+
+.options button:hover{
+    background-color: hsl(245, 75%, 62%);
+}
+
+.options a{
+    text-decoration: none;
+    color: hsl(224, 23%, 55%);
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: bold;
+}

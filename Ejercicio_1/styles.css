@@ -1,0 +1,91 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #333649;
+  height: 100vh;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card-body {
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #fff;
+  display: flex;
+}
+
+.title h1 {
+  font-weight: bolder;
+  font-family: sans-serif;
+  font-size: 60px;
+}
+
+.description p {
+  font-family: sans-serif;
+  font-size: 17px;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.information {
+  width: 400px;
+  padding: 40px;
+  margin-bottom: 40px;
+}
+
+.list{
+    display: flex;    
+    align-items: center;
+}
+
+.list svg{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.subscribe form{
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.label{
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.input{
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 15px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+button{
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    padding: 15px;
+    font-family: sans-serif;
+    font-size: 15px;
+    background-color: #333649;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
