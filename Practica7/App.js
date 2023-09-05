@@ -11,11 +11,11 @@ import { AntDesign } from "@expo/vector-icons";
 import Main from "./src/Components/main";
 
 export default function App() {
+  console.log(Platform.OS);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Text>¡Hola Mundo!</Text>
-      <AntDesign name="eye" size={54} color="black" />
       <Main />
     </View>
   );
@@ -24,11 +24,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    // justifyContent:'center',
-    // alignItems:'center'
-    // paddingTop: ReactStatus.currentHeight,
+    // backgroundColor: Platform.OS === "web" ? "black" : "white",
+    // backgroundColor: Platform.select({
+    //   ios: "blue",
+    //   android: "red",
+    //   web: "black",
+    // }),
+    backgroundColor: "red",
     paddingTop: Constants.statusBarHeight,
-    // paddingTop: Platform.OS === "android" ? ReactStatus.currentHeight : 0,
+    ...Platform.select({ web: { backgroundColor: "green" } }),
   },
 });
