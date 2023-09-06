@@ -8,15 +8,16 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import { AntDesign } from "@expo/vector-icons";
-import Main from "./src/Components/main";
+import WelcomeScreen from "./src/Screens/WelcomeScreen/index";
 
 export default function App() {
-  console.log(Platform.OS);
+  // console.log(Platform.OS);
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Main />
+      {/* <Main /> */}
+      <WelcomeScreen />
     </View>
   );
 }
@@ -30,8 +31,8 @@ const styles = StyleSheet.create({
     //   android: "red",
     //   web: "black",
     // }),
-    backgroundColor: "red",
+    backgroundColor: "white",
     paddingTop: Constants.statusBarHeight,
-    ...Platform.select({ web: { backgroundColor: "green" } }),
+    // ...Platform.select({ web: { backgroundColor: "green" } }),
   },
 });

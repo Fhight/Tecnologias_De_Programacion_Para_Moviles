@@ -1,18 +1,16 @@
 import { Platform, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import WebText from "./WebText";
-import AndroidText from "./AndroidText";
+import CustomText from "./CustomText.android";
+// import CustomText from "./CustomText.ios";
 
 const Main = () => {
-  const CustomText = Platform.select({
-    android: AndroidText,
-    web: WebText,
-  });
+  // const CustomText = Platform.select({
+  //   android: CustomText,
+  //   ios: CustomText,
+  // });
   return (
     <View>
-      {/* <WebText />
-      <AndroidText /> */}
-      <CustomText />
+      {/* <CustomText /> */}
     </View>
   );
 };
