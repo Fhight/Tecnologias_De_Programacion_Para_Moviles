@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Constants from 'expo-constants';
-import Withdraw from './src/components/Withdraw';
+import First from './src/screens/First';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style='auto' />
-      <Withdraw />
+      <First />
     </View>
   );
 }
@@ -16,6 +15,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#D76741',
-    paddingTop: Constants.statusBarHeight,
+    // paddingTop: Constants.statusBarHeight,
+    alignItems: 'start',
+    justifyContent: 'center',
   },
 });

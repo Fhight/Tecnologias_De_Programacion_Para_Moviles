@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
 
-const HeaderWallet = () => {
+const HeaderWallet = ({ handleShowSecondScreen }) => {
   return (
     <View style={styles.content}>
-      <AntDesign name='left' size={24} color='white' />
+      <TouchableOpacity onPress={(e) => handleShowSecondScreen(e)}>
+        <AntDesign name='left' size={24} color='white' />
+      </TouchableOpacity>
       <Text style={styles.text}>Withdraw Money</Text>
       <AntDesign name='staro' size={24} color='white' />
     </View>

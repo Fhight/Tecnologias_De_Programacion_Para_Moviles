@@ -28,7 +28,7 @@ const WithdrawAmount = () => {
         <TouchableOpacity style={styles.icon}>
           <Ionicons
             name='arrow-forward'
-            size={40}
+            size={45}
             color='#D16746'
             backgroundColor='white'
           />
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     flexDirection: 'row',
     padding: 5,
-    marginTop: 10,
+    marginTop: 25,
   },
   icon: {
     backgroundColor: 'white',

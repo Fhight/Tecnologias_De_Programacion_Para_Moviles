@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   secondContent: {
     backgroundColor: '#fff',
     marginHorizontal: 5,
-    height: '76%',
+    height: '77%',
     borderRadius: 20,
     marginTop: -2,
     paddingHorizontal: 20,

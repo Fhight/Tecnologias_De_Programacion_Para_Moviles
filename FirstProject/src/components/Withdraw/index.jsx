@@ -3,10 +3,10 @@ import React from 'react';
 import HeaderWallet from './Header';
 import BodyWallet from './Body';
 
-const Withdraw = () => {
+const Withdraw = ({ handleShowSecondScreen }) => {
   return (
     <View>
-      <HeaderWallet />
+      <HeaderWallet handleShowSecondScreen={handleShowSecondScreen}/>
       <BodyWallet />
     </View>
   );
