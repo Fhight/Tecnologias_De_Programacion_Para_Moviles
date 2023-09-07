@@ -19,11 +19,52 @@ const WelcomeScreen = () => {
         <Text style={{ color: "#c1c0c4" }}>Hello,</Text>
         <Text style={{ color: "#2b3941" }}>Chris 👋</Text>
       </Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+      <ScrollView
+        style={{ marginBottom: 40 }}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      >
+        <Card
+          isDarkBlue
+          text="Start training"
+          iconName={"hdd"}
+          iconType={"AntDesign"}
+        />
+        <Card
+          isDarkBlue={false}
+          text="Start training"
+          iconName={"hdd"}
+          iconType={"AntDesign"}
+        />
+        <Card
+          isDarkBlue
+          text="Start training"
+          iconName={"hdd"}
+          iconType={"AntDesign"}
+        />
+        <Card
+          isDarkBlue={false}
+          text="Start training"
+          iconName={"hdd"}
+          iconType={"AntDesign"}
+        />
+      </ScrollView>
+      <Text style={styles.textHeader}>What are your symptoms?</Text>
+      <ScrollView
+        style={styles.symptomsContainer}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      >
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: "600",
+            color: "#2263df",
+            textAlign: "center",
+          }}
+        >
+          I'm fine
+        </Text>
       </ScrollView>
     </View>
   );
@@ -53,5 +94,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 15,
     marginBottom: 20,
+  },
+  textHeader: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#495258",
+  },
+  symptomsContainer: {
+    backgroundColor: "#c6ceff",
+    width: 150,
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    borderRadius: 10,
+    marginTop: 20,
+    marginRight: 25,
   },
 });
