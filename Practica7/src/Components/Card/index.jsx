@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "center",
     gap: 50,
+    marginRight: 20, 
   },
   cardContainerLight: {
     backgroundColor: "#c6ceff",

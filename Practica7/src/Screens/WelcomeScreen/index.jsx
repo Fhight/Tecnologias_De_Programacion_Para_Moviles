@@ -1,9 +1,81 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import Card from "../../Components/Card";
+import SymptomCard from "../../Components/SymptomCard";
+import Therapist from "../../Components/Therapist";
 
 const WelcomeScreen = () => {
+  const IMAGE = "https://shmector.com/_ph/6/907397949.png";
+  const THERAPISTS = [
+    {
+      id: 1,
+      image: IMAGE,
+      name: "Dr. Alice Johnson",
+      job: "Physiotherapist",
+      rate: 5.0,
+    },
+    {
+      id: 2,
+      image: IMAGE,
+      name: "Dr. Mike Smith",
+      job: "Physiotherapist",
+      rate: 3.5,
+    },
+    {
+      id: 3,
+      image: IMAGE,
+      name: "Dr. Johnson",
+      job: "Physiotherapist",
+      rate: 5.0,
+    },
+    {
+      id: 4,
+      image: IMAGE,
+      name: "Dr. Alice Johnson",
+      job: "Physiotherapist",
+      rate: 5.0,
+    },
+  ];
+
+  const CARD = [
+    {
+      id: 1,
+      isDarkBlue: true,
+      text: "Start training",
+      iconName: "hdd",
+      iconType: "AntDesign",
+    },
+    {
+      id: 2,
+      isDarkBlue: false,
+      text: "Start training",
+      iconName: "hdd",
+      iconType: "AntDesign",
+    },
+    {
+      id: 3,
+      isDarkBlue: true,
+      text: "Start training",
+      iconName: "hdd",
+      iconType: "AntDesign",
+    },
+    {
+      id: 4,
+      isDarkBlue: false,
+      text: "Start training",
+      iconName: "hdd",
+      iconType: "AntDesign",
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -11,7 +83,7 @@ const WelcomeScreen = () => {
         <Image
           style={styles.headerImage}
           source={{
-            uri: "https://shmector.com/_ph/6/907397949.png",
+            uri: IMAGE,
           }}
         />
       </View>
@@ -24,48 +96,44 @@ const WelcomeScreen = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
       >
-        <Card
-          isDarkBlue
-          text="Start training"
-          iconName={"hdd"}
-          iconType={"AntDesign"}
-        />
-        <Card
-          isDarkBlue={false}
-          text="Start training"
-          iconName={"hdd"}
-          iconType={"AntDesign"}
-        />
-        <Card
-          isDarkBlue
-          text="Start training"
-          iconName={"hdd"}
-          iconType={"AntDesign"}
-        />
-        <Card
-          isDarkBlue={false}
-          text="Start training"
-          iconName={"hdd"}
-          iconType={"AntDesign"}
-        />
+        {CARD.map((card) => (
+          <Card
+            key={card.id}
+            isDarkBlue={card.isDarkBlue}
+            text={card.text}
+            iconName={card.iconName}
+            iconType={card.iconType}
+          />
+        ))}
       </ScrollView>
       <Text style={styles.textHeader}>What are your symptoms?</Text>
       <ScrollView
-        style={styles.symptomsContainer}
+        // style={styles.symptomsContainer}
         horizontal
         showsHorizontalScrollIndicator={false}
       >
-        <Text
-          style={{
-            fontSize: 18,
-            fontWeight: "600",
-            color: "#2263df",
-            textAlign: "center",
-          }}
-        >
-          I'm fine
-        </Text>
+        <SymptomCard symptom="none" />
+        <SymptomCard symptom="fever" />
+        <SymptomCard symptom="sneeze" />
+        <SymptomCard symptom="none" />
       </ScrollView>
+      <View style={styles.therapistTitle}>
+        <Text style={styles.textHeader}>Popular therapist</Text>
+        <Text style={{ color: "#d4d4d7", fontWeight: "bold" }}>See all</Text>
+      </View>
+      <Therapist
+        image={IMAGE}
+        name="Dr. Alice Johnson"
+        job="Physiotherapist"
+        rate={5.0}
+      />
+      <FlatList
+        data={THERAPISTS}
+        renderItem={({ item: { image, name, job, rate } }) => (
+          <Therapist image={image} name={name} job={job} rate={rate} />
+        )}
+        keyExtractor={(item) => item.id.toString()}
+      />
     </View>
   );
 };
@@ -100,13 +168,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#495258",
   },
-  symptomsContainer: {
-    backgroundColor: "#c6ceff",
-    width: 150,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-    borderRadius: 10,
+  therapistTitle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginTop: 20,
-    marginRight: 25,
   },
 });
