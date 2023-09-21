@@ -1,21 +1,28 @@
-import { useState } from "react";
-import { handleShowError } from "../helpers/showError";
+import { useState } from 'react';
+import { handleShowError } from '../helpers/showError';
 
 export const useToDos = () => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [todos, setTodos] = useState([]);
-  const [edit, setEdit] = useState([{ id: "", isEdit: false }]);
+  const [edit, setEdit] = useState([{ id: '', isEdit: false }]);
+  const [info, setInfo] = useState([]);
+  const [seeModal, setSeeModal] = useState(false);
 
   const handleAddTodo = () => {
-    if (input === "")
-      return handleShowError("Debes ingresar un nombre a la tarea");
+    if (input === '')
+      return handleShowError('Debes ingresar un nombre a la tarea');
+
+    if (input.length > 16)
+      return handleShowError(
+        'El nombre de la tarea no puede ser mayor a 16 caracteres'
+      );
 
     const existingTodo = todos.some(
       (todo) => todo.name.toLowerCase() === input.toLowerCase()
     );
 
     if (existingTodo) {
-      return handleShowError("Ya existe una tarea con ese nombre");
+      return handleShowError('Ya existe una tarea con ese nombre');
     }
 
     setTodos([
@@ -27,10 +34,10 @@ export const useToDos = () => {
         createAt: `${new Date().getDate()}/${
           new Date().getMonth() + 1
         }/${new Date().getFullYear()}`,
-        updatedAt: "",
+        updatedAt: '',
       },
     ]);
-    setInput("");
+    setInput('');
   };
 
   const handleDeleteTodo = (id) => {
@@ -57,20 +64,25 @@ export const useToDos = () => {
     if (!edit.isEdit) {
       setInput(todos.find((todo) => todo.id === id).name);
     } else {
-      setInput("");
+      setInput('');
     }
   };
 
   const handleEditTodo = () => {
-    if (input === "")
-      return handleShowError("Debes ingresar un nombre a la tarea");
+    if (input === '')
+      return handleShowError('Debes ingresar un nombre a la tarea');
+
+    if (input.length > 16)
+      return handleShowError(
+        'El nombre de la tarea no puede ser mayor a 16 caracteres'
+      );
 
     const existingTodo = todos.some(
       (todo) => todo.name.toLowerCase() === input.toLowerCase()
     );
 
     if (existingTodo) {
-      return handleShowError("Ya existe una tarea con ese nombre");
+      return handleShowError('Ya existe una tarea con ese nombre');
     }
 
     const updatedTodos = todos.map((todo) => {
@@ -87,8 +99,13 @@ export const useToDos = () => {
     });
 
     setTodos(updatedTodos);
-    setInput("");
-    setEdit({ isEdit: !edit.isEdit, id: "" });
+    setInput('');
+    setEdit({ isEdit: !edit.isEdit, id: '' });
+  };
+
+  const handleInfo = (id) => {
+    setInfo(todos.find((todo) => todo.id === id));
+    setSeeModal(!seeModal);
   };
 
   return {
@@ -98,10 +115,14 @@ export const useToDos = () => {
     setTodos,
     edit,
     setEdit,
+    info,
+    seeModal,
+    setSeeModal,
     handleAddTodo,
     handleDeleteTodo,
     handleCompleteTodo,
     handleEdit,
     handleEditTodo,
+    handleInfo,
   };
 };

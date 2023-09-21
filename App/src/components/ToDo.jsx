@@ -10,6 +10,7 @@ function ToDo({
   isCompleted,
   handleDelete,
   handleComplete,
+  handleInfo,
   isEdit,
 }) {
   return (
@@ -27,16 +28,31 @@ function ToDo({
         }}
       >
         <View>
-          <CustomButton text='Edit' onPress={() => isEdit(id)} />
+          <CustomButton
+            text='edit'
+            color={'orange'}
+            onPress={() => isEdit(id)}
+          />
           {updatedAt !== '' && (
-            <Text style={{ fontSize: 10 }}>{`Updated at: \n${updatedAt}`}</Text>
+            <Text style={{ fontSize: 10, position: 'absolute', width: 150, marginTop:30 }}>{`Updated at: ${updatedAt}`}</Text>
           )}
         </View>
-        <CustomButton text='Delete' onPress={() => handleDelete(id)} />
+        <CustomButton
+          text='eraser'
+          color={'red'}
+          onPress={() => handleDelete(id)}
+        />
 
         <CustomButton
-          text={isCompleted ? 'Done' : 'Complete'}
+          text={isCompleted ? 'medal' : 'check'}
+          color={isCompleted ? 'green' : 'blue'}
           onPress={() => handleComplete(id)}
+        />
+
+        <CustomButton
+          text='info-circle'
+          color={'black'}
+          onPress={() => handleInfo(id)}
         />
       </View>
     </View>

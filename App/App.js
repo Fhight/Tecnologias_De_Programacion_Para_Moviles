@@ -6,6 +6,7 @@ import CustomButton from "./src/components/CustomButton";
 import ToDo from "./src/components/ToDo";
 import { useState } from "react";
 import { useToDos } from "./src/hooks/useToDos";
+import InfoModal from "./src/components/InfoModal";
 
 export default function App() {
   const {
@@ -15,11 +16,15 @@ export default function App() {
     setTodos,
     edit,
     setEdit,
+    info,
+    seeModal,
+    setSeeModal,
     handleAddTodo,
     handleDeleteTodo,
     handleCompleteTodo,
     handleEdit,
     handleEditTodo,
+    handleInfo
   } = useToDos();
 
   return (
@@ -54,11 +59,14 @@ export default function App() {
             onChangeText={(value) => setInput(value)}
           />
           {edit.isEdit ? (
-            <CustomButton text="Edit task" onPress={handleEditTodo} />
+            <CustomButton text="pencil-alt" color={'orange'} onPress={handleEditTodo} />
           ) : (
-            <CustomButton text="Add task" onPress={handleAddTodo} />
+            <CustomButton text="plus-square" color={'green'} onPress={handleAddTodo} />
           )}
         </View>
+      </View>
+      <View>
+        <InfoModal info={info} seeModal={seeModal} setSeeModal={setSeeModal}/>
       </View>
       <FlatList
         data={todos}
@@ -74,6 +82,7 @@ export default function App() {
             isEdit={handleEdit}
             handleDelete={handleDeleteTodo}
             handleComplete={handleCompleteTodo}
+            handleInfo={handleInfo}
           />
         )}
       />
