@@ -5,8 +5,8 @@ import Main from './src/screens/Main';
 
 export default function App() {
   return (
-    <View style={styles.container}>    
-      <StatusBar style="auto" />
+    <View style={styles.container}>
+      <StatusBar style='auto' />
       <Main />
     </View>
   );
@@ -15,8 +15,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#272B33',
     paddingTop: Constants.statusBarHeight,
-    
   },
 });

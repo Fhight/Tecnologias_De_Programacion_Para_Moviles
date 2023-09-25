@@ -1,9 +1,10 @@
-import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import Card from '../components/Card';
 
 const Main = () => {
-  const [input, setInput] = useState("");
-  const [input2, setInput2] = useState("");
+  const [input, setInput] = useState('');
+  const [input2, setInput2] = useState('');
 
   const [characters, setCharacters] = useState([]);
 
@@ -11,7 +12,7 @@ const Main = () => {
     const getApiData = async () => {
       try {
         const response = await fetch(
-          "https://rickandmortyapi.com/api/character"
+          'https://rickandmortyapi.com/api/character'
         );
         const data = await response.json();
         setCharacters(data.results);
@@ -23,19 +24,23 @@ const Main = () => {
   }, []);
 
   return (
-    <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
-      <Text style={{ textAlign: "center", fontSize: 50 }}>CHARACTERS</Text>
+    <View style={{ paddingTop: 10, paddingHorizontal: 10 }}>
+      <Text
+        style={{
+          textAlign: 'center',
+          fontSize: 50,
+          color: 'white',
+          fontWeight: 'bold',
+        }}
+      >
+        CHARACTERS
+      </Text>
       <FlatList
         data={characters}
-        renderItem={({ item }) => {
-          return (
-            <View>
-              <Text>{item.id}</Text>
-              <Text>{item.name}</Text>
-              <Text>{item.gender}</Text>
-            </View>
-          );
+        renderItem={({ item }, key) => {
+          return <Card info={item} key={key} />;
         }}
+        style={{ height: 700 }}
       />
     </View>
   );
