@@ -1,8 +1,9 @@
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Main = () => {
+const Main = ({ navigation }) => {
   const [input, setInput] = useState('');
   const [input2, setInput2] = useState('');
 
@@ -24,7 +25,7 @@ const Main = () => {
   }, []);
 
   return (
-    <View style={{ paddingTop: 10, paddingHorizontal: 10 }}>
+    <View style={styles.container}>
       <Text
         style={{
           textAlign: 'center',
@@ -38,9 +39,15 @@ const Main = () => {
       <FlatList
         data={characters}
         renderItem={({ item }, key) => {
-          return <Card info={item} key={key} />;
+          return (
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('Character', { item })}
+            >
+              <Card info={item} key={key} />
+            </TouchableOpacity>
+          );
         }}
-        style={{ height: 700 }}
+        style={{ height: 665 }}
       />
     </View>
   );
@@ -48,4 +55,10 @@ const Main = () => {
 
 export default Main;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#272B33',
+    paddingTop: 10,
+    paddingHorizontal: 10,
+  },
+});
