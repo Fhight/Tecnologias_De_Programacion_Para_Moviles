@@ -1,5 +1,6 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Header } from "@react-navigation/stack";
 
 const Home = ({ navigation }) => {
   return (
