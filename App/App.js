@@ -6,23 +6,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
+import { useState } from "react";
 
 const Stack = createStackNavigator();
 const BottomTabNavigator = createStackNavigator();
 
 export default function App() {
+
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: "#f4511e",
-            },
-            headerShown: false,
-          }}
-        >
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>
