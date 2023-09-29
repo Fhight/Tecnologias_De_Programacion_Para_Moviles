@@ -9,79 +9,65 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Header } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import { TextInput } from "react-native-gesture-handler";
 
-const Home = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [isLoading, setLoading] = useState(true);
+const Home = ({}) => {
+  const navigation = useNavigation();
+  const [inputValue, setInputValue] = useState("");
+  const [characters, setCharacters] = useState([]);
+  const [filterCharacters, setFilterCharacters] = useState([]);
 
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
         const response = await fetch(
           "https://rickandmortyapi.com/api/character"
         );
-        await delay(3000);
         const json = await response.json();
-        setLoading(false);
+        setCharacters(json.results);
+        setFilterCharacters(characters);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [isEnabled]);
+    navigation.setOptions({
+      title: "HOME FROM COMPONENT",
+      headerRight: () => <Text>Right from component</Text>,
+      headerSearchBarOptions: {
+        placeholder: "Search",
+      },
+    });
+  }, [navigation]);
+
+  const filterData = (e) => {
+    setInputValue(e);
+    if (inputValue === "") return;
+    setFilterCharacters(
+      ...characters.filter((character) => character.name === e)
+    );
+  };
 
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
-
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-        style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }] }}
+    <View>
+      <Text>hola</Text>
+      <TextInput
+        value={inputValue}
+        onChangeText={(e) => filterData(e)}
+        style={{ borderWidth: 1, paddingVertical: 10, paddingHorizontal: 20 }}
       />
-      {isLoading && <ActivityIndicator size="large" color="#00ff00" />}
-      {isEnabled ? <Text>Switch is ON</Text> : <Text>Switch is OFF</Text>}
-      <Button
-        title="Go to Login"
-        onPress={() => navigation.navigate("Login", { name: "Hola" })}
-      />
+      <Text>{inputValue}</Text>
+      {filterCharacters.length > 0 &&
+        filterCharacters.map((character) => {
+          return (
+            <View key={character.id}>
+              <Text style={{ fontSize: 20 }}>{character.name}</Text>
+            </View>
+          );
+        })}
     </View>
   );
 };

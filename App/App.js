@@ -12,12 +12,25 @@ const Stack = createStackNavigator();
 const BottomTabNavigator = createStackNavigator();
 
 export default function App() {
-
   return (
     <NavigationContainer>
       <View style={styles.container}>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={
+              {
+                // headerMode: "screen",
+                // headerTintColor: "white",
+                // headerStyle: {
+                //   backgroundColor: "red",
+                // },
+                // title: "Home2",
+                // headerRight: () => <Text>Right</Text>,
+              }
+            }
+          />
           <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>
         <StatusBar style="auto" />
