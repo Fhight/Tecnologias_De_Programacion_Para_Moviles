@@ -2,86 +2,77 @@ import {
   ActivityIndicator,
   Alert,
   Button,
+  FlatList,
   Modal,
   Pressable,
+  ScrollView,
   StyleSheet,
   Switch,
   Text,
   View,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { Header } from "@react-navigation/stack";
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Header } from '@react-navigation/stack';
 
 const Home = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(false);
   const [isLoading, setLoading] = useState(true);
+  const [characters, setCharacters] = useState([]);
 
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          "https://rickandmortyapi.com/api/character"
-        );
-        await delay(3000);
+        const response = await fetch('https://swapi.dev/api/people/');
+        await delay(5000);
         const json = await response.json();
+        setCharacters(json.results);
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [isEnabled]);
+  }, []);
 
   return (
     <View style={styles.centeredView}>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
+      <Text style={{ fontWeight: 'bold', fontSize: 30, color: 'white' }}>
+        STAR WARS - CHARACTERS
+      </Text>
+      {isLoading && (
+        <View>
+          <ActivityIndicator size='large' color='#00ff00' />
+          <Text style={{ fontWeight: 'bold', fontSize: 30, color: '#00ff00' }}>
+            Loading...
+          </Text>
         </View>
-      </Modal>
-
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
-
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-        style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }] }}
-      />
-      {isLoading && <ActivityIndicator size="large" color="#00ff00" />}
-      {isEnabled ? <Text>Switch is ON</Text> : <Text>Switch is OFF</Text>}
-      <Button
-        title="Go to Login"
-        onPress={() => navigation.navigate("Login", { name: "Hola" })}
-      />
+      )}
+      <ScrollView style={styles.scrollCharacter}>
+        {characters.map((character, id) => {
+          return (
+            <View key={id} style={styles.character}>
+              <View style={styles.info}>
+                <Text style={styles.property}>Name:</Text>
+                <Text style={styles.infoText}>{character.name}</Text>
+              </View>
+              <View style={styles.info}>
+                <Text style={styles.property}>Height:</Text>
+                <Text style={styles.infoText}>{character.height} cm</Text>
+              </View>
+              <View style={styles.info}>
+                <Text style={styles.property}>Gender:</Text>
+                <Text style={styles.infoText}>{character.gender}</Text>
+              </View>
+            </View>
+          );
+        })}
+      </ScrollView>
+      {/* <Button
+        title='Go to Login'
+        onPress={() => navigation.navigate('Login', { name: 'Hola' })}
+      /> */}
     </View>
   );
 };
@@ -91,44 +82,33 @@ export default Home;
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems: 'center',
     gap: 10,
     marginTop: 22,
+    backgroundColor: '#202124',
   },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
+  scrollCharacter: {
+    width: '100%',
+    flex: 1,
+    gap: 10,
     padding: 10,
-    elevation: 2,
+    marginBottom: 5,
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
+  character: {
+    backgroundColor: 'white',
+    marginVertical: 10,
+    borderRadius: 10,
+    padding: 10,
   },
-  buttonClose: {
-    backgroundColor: "#2196F3",
+  info: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
+  property: {
+    fontWeight: 'bold',
+    fontSize: 20,
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+  infoText: {
+    fontSize: 16,
   },
 });
