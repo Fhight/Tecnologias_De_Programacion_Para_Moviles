@@ -1,14 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Constants from 'expo-constants';
-import Send from './screens/Send';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import Constants from "expo-constants";
+import Send from "./screens/Send";
+import Balance from "./screens/Balance";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style='auto' />
-      <Send />
+      <StatusBar style="auto" />
+      {/* <Send /> */}
+      <Balance />
     </View>
   );
 }
@@ -16,8 +18,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: "black",
     paddingTop: Constants.statusBarHeight,
-    padding: 30,
   },
 });
