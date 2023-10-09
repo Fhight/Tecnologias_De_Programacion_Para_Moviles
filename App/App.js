@@ -9,6 +9,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import AuthContextProvider from "./src/context/authContext";
 import Account from "./src/screens/Account";
 import { useAuthContext } from "./src/hooks/useAuthContext";
+import GetStarted from "./src/screens/GetStarted";
+import Register from "./src/screens/Register";
+import { WHITE } from "./src/data/COLORS";
 
 const Stack = createStackNavigator();
 
@@ -17,11 +20,31 @@ export default function App() {
     <AuthContextProvider>
       <NavigationContainer>
         <View style={styles.container}>
-          <Stack.Navigator initialRouteName="Login">
+          <Stack.Navigator initialRouteName="GetStarted">
             {/* {Layout()} */}
+            <Stack.Screen
+              name="GetStarted"
+              component={GetStarted}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={{
+                title: "",
+              }}
+            />
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Account" component={Account} />
-            <Stack.Screen name="Login" component={Login} />
           </Stack.Navigator>
           <StatusBar style="auto" />
         </View>
@@ -49,6 +72,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: Constants.statusBarHeight,
+    // paddingTop: Constants.statusBarHeight,
   },
 });
