@@ -1,17 +1,21 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import Constants from "expo-constants";
-import "react-native-gesture-handler";
-import { createStackNavigator } from "@react-navigation/stack";
-import Home from "./src/screens/Home";
-import Login from "./src/screens/Login";
-import { NavigationContainer } from "@react-navigation/native";
-import AuthContextProvider from "./src/context/authContext";
-import Account from "./src/screens/Account";
-import { useAuthContext } from "./src/hooks/useAuthContext";
-import GetStarted from "./src/screens/GetStarted";
-import Register from "./src/screens/Register";
-import { WHITE } from "./src/data/COLORS";
+import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import Constants from 'expo-constants';
+import 'react-native-gesture-handler';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './src/screens/Home';
+import Login from './src/screens/Login';
+import { NavigationContainer } from '@react-navigation/native';
+import AuthContextProvider from './src/context/authContext';
+import Account from './src/screens/Account';
+import { useAuthContext } from './src/hooks/useAuthContext';
+import GetStarted from './src/screens/GetStarted';
+import Register from './src/screens/Register';
+import { WHITE } from './src/data/COLORS';
+import Main from './src/screens/Main';
+import Bottom from './src/components/Bottom';
+import MyDrawer from './src/components/MyDrawer';
 
 const Stack = createStackNavigator();
 
@@ -20,33 +24,46 @@ export default function App() {
     <AuthContextProvider>
       <NavigationContainer>
         <View style={styles.container}>
-          <Stack.Navigator initialRouteName="GetStarted">
+          <Stack.Navigator initialRouteName='GetStarted'>
             {/* {Layout()} */}
             <Stack.Screen
-              name="GetStarted"
+              name='GetStarted'
               component={GetStarted}
               options={{
                 headerShown: false,
               }}
             />
             <Stack.Screen
-              name="Login"
+              name='Login'
               component={Login}
               options={{
                 headerShown: false,
               }}
             />
             <Stack.Screen
-              name="Register"
+              name='Register'
               component={Register}
               options={{
-                title: "",
+                title: '',
               }}
             />
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Account" component={Account} />
+            <Stack.Screen name='Account' component={Account} />
+            <Stack.Screen
+              name='Bottom'
+              component={Bottom}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name='Drawer'
+              component={MyDrawer}
+              options={{
+                headerShown: false,
+              }}
+            />
           </Stack.Navigator>
-          <StatusBar style="auto" />
+          <StatusBar style='auto' />
         </View>
       </NavigationContainer>
     </AuthContextProvider>
@@ -57,13 +74,13 @@ const Layout = () => {
   const { user } = useAuthContext();
 
   if (!user) {
-    return <Stack.Screen name="Login" component={Login} />;
+    return <Stack.Screen name='Login' component={Login} />;
   }
 
   return (
     <>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name='Home' component={Home} />
+      <Stack.Screen name='Account' component={Account} />
     </>
   );
 };
@@ -71,7 +88,7 @@ const Layout = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     // paddingTop: Constants.statusBarHeight,
   },
 });

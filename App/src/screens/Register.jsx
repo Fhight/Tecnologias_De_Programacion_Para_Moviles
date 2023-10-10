@@ -4,31 +4,33 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
-import React, { useState } from "react";
-import { TURQUESA, WHITE } from "../data/COLORS";
+} from 'react-native';
+import React, { useState } from 'react';
+import { TURQUESA, WHITE } from '../data/COLORS';
+import { useNavigation } from '@react-navigation/native';
 
 const Register = () => {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const navigation = useNavigation();
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={[styles.container, { backgroundColor: WHITE }]}>
       <Text style={styles.title}>Sign Up</Text>
       <View
         style={{
-          flexDirection: "row",
-          alignItems: "center",
+          flexDirection: 'row',
+          alignItems: 'center',
           gap: 5,
         }}
       >
         <Text style={{ fontSize: 16 }}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text
             style={{
               color: TURQUESA,
-              fontWeight: "500",
-              textDecorationLine: "underline",
+              fontWeight: '500',
+              textDecorationLine: 'underline',
               fontSize: 16,
             }}
           >
@@ -42,7 +44,7 @@ const Register = () => {
           <TextInput
             value={name}
             onChangeText={(e) => setName(e)}
-            placeholder="Enter your name"
+            placeholder='Enter your name'
             style={styles.input}
           />
         </View>
@@ -51,7 +53,7 @@ const Register = () => {
           <TextInput
             value={username}
             onChangeText={(e) => setUsername(e)}
-            placeholder="Enter your email"
+            placeholder='Enter your email'
             style={styles.input}
           />
         </View>
@@ -60,7 +62,7 @@ const Register = () => {
           <TextInput
             value={password}
             onChangeText={(e) => setPassword(e)}
-            placeholder="Enter your password"
+            placeholder='Enter your password'
             style={styles.input}
             secureTextEntry
           />
@@ -73,20 +75,20 @@ const Register = () => {
           paddingHorizontal: 20,
           paddingVertical: 15,
           borderRadius: 30,
-          alignItems: "center",
+          alignItems: 'center',
         }}
       >
-        <Text style={{ color: "white", fontWeight: "600", fontSize: 20 }}>
+        <Text style={{ color: 'white', fontWeight: '600', fontSize: 20 }}>
           Sign Up
         </Text>
       </TouchableOpacity>
       <View
         style={{
-          flexDirection: "row",
-          alignItems: "center",
+          flexDirection: 'row',
+          alignItems: 'center',
           marginTop: 15,
-          justifyContent: "center",
           gap: 5,
+          flexWrap: 'wrap',
         }}
       >
         <Text>By signing up, you are agreeing to our</Text>
@@ -94,8 +96,8 @@ const Register = () => {
           <Text
             style={{
               color: TURQUESA,
-              fontWeight: "500",
-              textDecorationLine: "underline",
+              fontWeight: '500',
+              textDecorationLine: 'underline',
             }}
           >
             Terms of Service
@@ -106,11 +108,11 @@ const Register = () => {
           <Text
             style={{
               color: TURQUESA,
-              fontWeight: "500",
-              textDecorationLine: "underline",
+              fontWeight: '500',
+              textDecorationLine: 'underline',
             }}
           >
-            Privacy Policy 
+            Privacy Policy
           </Text>
         </TouchableOpacity>
       </View>
@@ -127,17 +129,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   inputLabel: {
     fontSize: 15,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   input: {
     borderWidth: 1,
     borderRadius: 5,
     paddingVertical: 15,
     paddingHorizontal: 15,
-    borderColor: "gray",
+    borderColor: 'gray',
   },
 });
