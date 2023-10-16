@@ -17,7 +17,7 @@ const Login = () => {
 
   const { handleLogin: onLogin } = useAuthContext();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     try {
       const loginValue = onLogin(username, password);
       if (loginValue) {
