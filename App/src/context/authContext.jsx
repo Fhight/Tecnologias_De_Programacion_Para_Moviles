@@ -1,25 +1,50 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from 'react';
+import * as SecureStore from 'expo-secure-store';
 
 export const AuthContext = createContext({
-  user: "",
+  user: '',
 });
 
-import React from "react";
+import React from 'react';
 
 const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState('');
 
-  const handleLogin = (username, password) => {
-    if (username === "Pablo" && password === "123") {
-      setUser(username);
-      return true;
+  const handleLogin = async (username, password) => {
+    if (username === 'Pablo' && password === '123') {
+      try {
+        await SecureStore.setItemAsync('user', username);
+        setUser(username);
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
     }
     return false;
   };
 
-  const handleLogOut = () => {
-    setUser("");
+  const handleLogOut = async () => {
+    try {
+      setUser('');
+      await SecureStore.deleteItemAsync('user');
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        let result = await SecureStore.getItemAsync('user');
+        if (result) {
+          setUser(result);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUser();
+  }, []);
 
   const values = {
     user,
